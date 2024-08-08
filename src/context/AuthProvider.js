@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
             if (refreshToken) {
               try {
                 console.log('Refresh token found:', refreshToken);
-                const response = await axios.post('http://api.edumax-kr.com/auth/token/refresh/', {
+                const response = await axios.post('https://api.edumax-kr.com/auth/token/refresh/', {
                   refresh: refreshToken
                 });
                 const { access } = response.data;
