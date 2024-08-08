@@ -16,7 +16,7 @@ const GoogleLoginPage = () => {
           const data = await googleLoginMutation.mutateAsync(code);
 
           login(data.token.access, data.token.refresh, data.user.nickname, data.user.is_staff);
-          window.location.href = "http://localhost:3000"
+          window.location.href = "http://edumax-kr.com"
         } catch (error) {
           console.error('로그인 실패:', error);
           if (error.response && error.response.data) {
@@ -31,7 +31,7 @@ const GoogleLoginPage = () => {
         } else
             alert("로그인에 실패하였습니다.");
           logout();
-          window.location.href = "http://localhost:3000"
+          window.location.href = "http://edumax-kr.com"
         }
       };
 

@@ -29,21 +29,21 @@ function Home() {
   }, [isAuthenticated]);
 
   const handleRequestPermission = () => {
-    requestNotificationPermission().then(token => {
-      if (token) {
-        console.log('Received FCM token:', token);
-        // Call the function to register the token to the server
-        registerFCMToken(token).then(response => {
-          console.log('FCM token registered successfully:', response);
-        }).catch(error => {
-          console.error('Error registering FCM token:', error);
-        });
-      } else {
-        console.log('Failed to get permission or token.');
-      }
-    }).catch(error => {
-      console.error('Error requesting notification permission:', error);
-    });
+    // requestNotificationPermission().then(token => {
+    //   if (token) {
+    //     console.log('Received FCM token:', token);
+    //     // Call the function to register the token to the server
+    //     registerFCMToken(token).then(response => {
+    //       console.log('FCM token registered successfully:', response);
+    //     }).catch(error => {
+    //       console.error('Error registering FCM token:', error);
+    //     });
+    //   } else {
+    //     console.log('Failed to get permission or token.');
+    //   }
+    // }).catch(error => {
+    //   console.error('Error requesting notification permission:', error);
+    // });
   };
   return (
     <PageFrame>
