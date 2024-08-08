@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://3.38.151.192/' // API의 기본 URL 설정
+  baseURL: 'http://api.edumax-kr.com/' // API의 기본 URL 설정
 });
 
 
