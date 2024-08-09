@@ -16,16 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.18.2'  # 지정한 Node.js 버전
-
-      - name: Install Yarn
-        run: npm install -g yarn
+          node-version: '16.20.2'  # Node.js 버전을 16.20.2로 설정
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Build React app
-        run: yarn build
+        run: npm run build
 
       - name: Zip build artifacts
         run: zip -r build.zip build/
