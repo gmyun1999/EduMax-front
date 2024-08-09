@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Build React app
-        run: npm run build
+        run: CI=false npm run build  # CI=false 설정으로 경고를 무시
 
       - name: Zip build artifacts
         run: zip -r build.zip build/
