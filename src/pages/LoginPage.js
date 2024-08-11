@@ -104,13 +104,6 @@ const LoginPage = () => {
               Google 계정으로 로그인
           </Typography>
         </SocialLoginButton>
-        <SocialLoginButton
-          imagePath={Kakaoicon}>
-          <Typography
-            size="body_content_medium">
-              Kakao 계정으로 로그인
-          </Typography>
-        </SocialLoginButton>
       </BodyWrapper>
       <FindModal isOpen={isEmailModal} isPassword={false} onClose={() => setIsEmailModal(false)} /> {/* Render FindModal for ID */}
       <FindModal isOpen={isPwModal} isPassword={true} onClose={() => setIsPwModal(false)} /> {/* Render FindModal for Password */}
