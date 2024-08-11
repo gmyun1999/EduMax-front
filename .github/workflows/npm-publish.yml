@@ -38,18 +38,18 @@ jobs:
         run: |
           # 현재 커밋의 SHA 값을 사용하여 zip 파일 업로드
           aws s3 cp build.zip s3://${{ secrets.S3_BUCKET }}/backups/${{ github.sha }}-build.zip
-
-      - name: Remove existing static files (except backups)
+          
+      - name: Remove existing static files (except backups and sitemap.xml)
         run: |
-          # backup 폴더를 제외한 모든 파일과 폴더를 삭제
+          # backup 폴더와 sitemap.xml 파일을 제외한 모든 파일과 폴더를 삭제
           aws s3 ls s3://${{ secrets.S3_BUCKET }}/ | while read -r line;
           do
             folder=$(echo $line | awk '{print $2}');
-            if [[ "$folder" != "backups/" ]]; then
+            if [[ "$folder" != "backups/" ]] && [[ "$folder" != "sitemap.xml" ]]; then
               aws s3 rm s3://${{ secrets.S3_BUCKET }}/$folder --recursive;
             fi
           done
-
+          
       - name: Upload new build files
         run: |
           # 새로운 빌드 파일 업로드
