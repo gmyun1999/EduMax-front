@@ -5,11 +5,14 @@ import { useMutation } from "react-query";
 import AuthContext from "../context/AuthProvider";
 import LoginInput from "../components/LoginInput";
 import Typography from "../components/Typography";
-import GoogleIcon from "../assets/googleicon.png"
-import Kakaoicon from "../assets/kakaoicon.png"
-import { fetchLogin, fetchSocialLogin, fetchSocialLoginRedirect } from "../apifetchers/fetcher";
+import GoogleIcon from "../assets/googleicon.png";
+import Kakaoicon from "../assets/kakaoicon.png";
+import {
+  fetchLogin,
+  fetchSocialLogin,
+  fetchSocialLoginRedirect,
+} from "../apifetchers/fetcher";
 import FindModal from "../components/modals/FindModal"; // Import FindModal
-
 
 const SocialLoginButton = ({ onClick, imagePath, margin, children }) => (
   <SocialLoginStyledButton onClick={onClick} margin={margin}>
@@ -19,8 +22,8 @@ const SocialLoginButton = ({ onClick, imagePath, margin, children }) => (
 );
 
 const LoginPage = () => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const [isEmailModal, setIsEmailModal] = useState(false); // Modal state for ID
   const [isPwModal, setIsPwModal] = useState(false); // Modal state for Password
 
@@ -33,11 +36,16 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       const data = await loginMutation.mutateAsync({ login_id: id, password });
-      login(data.token.access, data.token.refresh, data.user.nickname, data.user.is_staff);
+      login(
+        data.token.access,
+        data.token.refresh,
+        data.user.nickname,
+        data.user.is_staff
+      );
       navigate("/");
     } catch (error) {
-      console.error('로그인 실패:', error);
-      alert("로그인에 실패하였습니다.")
+      console.error("로그인 실패:", error);
+      alert("로그인에 실패하였습니다.");
       logout();
     }
   };
@@ -46,8 +54,8 @@ const LoginPage = () => {
     try {
       const data = await googleLoginMutation.mutateAsync();
     } catch (error) {
-      console.error('로그인 실패:', error);
-      alert("로그인에 실패하였습니다.")
+      console.error("로그인 실패:", error);
+      alert("로그인에 실패하였습니다.");
       logout();
     }
   };
@@ -55,14 +63,12 @@ const LoginPage = () => {
   return (
     <Wrapper>
       <Link to="/" style={{ textDecoration: "none" }}>
-        <LogoWrapper>
-          EduMax
-        </LogoWrapper>
+        <LogoWrapper>EduMax</LogoWrapper>
       </Link>
       <BodyWrapper>
-        <IdInput placeholder="아이디" input={id} setInput={setId}/>
-        <PwInput 
-          placeholder="비밀번호" 
+        <IdInput placeholder="아이디" input={id} setInput={setId} />
+        <PwInput
+          placeholder="비밀번호"
           isPassword={true}
           input={password}
           setInput={setPassword}
@@ -70,46 +76,56 @@ const LoginPage = () => {
         <LoginButton onClick={handleLogin}>로그인</LoginButton>
         <LoginTextWrapper>
           <SignupTextWrapper>
-            <Link to="/signup" style={{ textDecoration: 'none' }}>
-              <Typography
-                color="navy" 
-                size="body_content_small">
-                  회원가입
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <Typography color="navy" size="body_content_small">
+                회원가입
               </Typography>
             </Link>
           </SignupTextWrapper>
           <InnerTextWrapper>
             <Typography
-              color="navy" 
+              color="navy"
               size="body_content_small"
               onClick={() => setIsEmailModal(true)} // Open modal for finding ID
-              style={{ cursor: 'pointer' }}>
-                아이디 찾기
+              style={{ cursor: "pointer" }}
+            >
+              아이디 찾기
             </Typography>
             <Typography
-              color="navy" 
+              color="navy"
               size="body_content_small"
               onClick={() => setIsPwModal(true)} // Open modal for finding Password
-              style={{ cursor: 'pointer' }}>
-                비밀번호 찾기
+              style={{ cursor: "pointer" }}
+            >
+              비밀번호 찾기
             </Typography>
           </InnerTextWrapper>
         </LoginTextWrapper>
         <SocialLoginButton
           margin="0 0 10px 0"
           imagePath={GoogleIcon}
-          onClick={handleGoogleLogin}>
-          <Typography
-            size="body_content_medium">
-              Google 계정으로 로그인
+          onClick={handleGoogleLogin}
+        >
+          <Typography size="body_content_medium">
+            Google 계정으로 로그인
           </Typography>
         </SocialLoginButton>
       </BodyWrapper>
-      <FindModal isOpen={isEmailModal} isPassword={false} onClose={() => setIsEmailModal(false)} /> {/* Render FindModal for ID */}
-      <FindModal isOpen={isPwModal} isPassword={true} onClose={() => setIsPwModal(false)} /> {/* Render FindModal for Password */}
+      <FindModal
+        isOpen={isEmailModal}
+        isPassword={false}
+        onClose={() => setIsEmailModal(false)}
+      />{" "}
+      {/* Render FindModal for ID */}
+      <FindModal
+        isOpen={isPwModal}
+        isPassword={true}
+        onClose={() => setIsPwModal(false)}
+      />{" "}
+      {/* Render FindModal for Password */}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default LoginPage;
 
@@ -129,7 +145,7 @@ const LogoWrapper = styled.div`
   align-items: center; // 추가
   width: 210px;
   height: 100px;
-  color: #4C6BFF;
+  color: #4c6bff;
   font-family: "Noto Sans Symbols";
   font-size: 50px;
   font-style: normal;
@@ -144,8 +160,8 @@ const BodyWrapper = styled.div`
   box-sizing: border-box;
   padding-top: 40px;
   width: 100%;
-  height: 480px;
-  border: 2px solid #DFE5EE;
+  height: 420px;
+  border: 2px solid #dfe5ee;
   border-radius: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
@@ -169,9 +185,9 @@ const LoginButton = styled.button`
   height: 50px;
   width: 310px;
   border-radius: 20px;
-  background-color: #4C6BFF;
+  background-color: #4c6bff;
   border: none;
-  color: #FFF;
+  color: #fff;
   font-family: "Noto Sans Symbols";
   font-size: 16px;
   font-weight: 700;
@@ -215,20 +231,20 @@ const SocialLoginStyledButton = styled.button`
   width: 310px;
   height: 55px;
   border-radius: 20px;
-  border: 1px solid #B6C0D5;
+  border: 1px solid #b6c0d5;
   padding: 12px 10px 12px 25px;
   display: flex;
   align-items: center;
   gap: 15px;
   background-color: white;
-  margin: ${({ margin }) => margin || '0'};
+  margin: ${({ margin }) => margin || "0"};
 
   &:active {
-    border: 2px solid #4C6BFF;
+    border: 2px solid #4c6bff;
   }
 
   &:hover {
-    border: 2px solid #4C6BFF;
+    border: 2px solid #4c6bff;
     cursor: pointer;
   }
 `;
